@@ -40,7 +40,7 @@ class matchController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
