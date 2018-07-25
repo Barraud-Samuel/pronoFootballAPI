@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Matchs;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Matchs;
 use App\Http\Resources\Match as MatchResource;
 
 class matchController extends Controller
@@ -29,7 +30,15 @@ class matchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $match = $request->isMethod('put') ? Matchs::findOrFail
+        ($request->match_id) : new Matchs;
+        $match->id = $request->input('match_id');
+        $match->status = $request->input('status');
+        $match->matchday = $request->input('matchday');
+
+        if($match->save()){
+            return new MatchResource($match);
+        }
     }
 
     /**
@@ -40,7 +49,11 @@ class matchController extends Controller
      */
     public function show($id)
     {
-        
+        //get specific match
+        $match = Matchs::findOrFail($id);
+
+        //return the single match as a resource
+        return new MatchResource($match);
     }
 
     /**
@@ -51,6 +64,11 @@ class matchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //get specific match
+        $match = Matchs::findOrFail($id);
+
+        if ($match->delete()){
+            return new MatchResource($match);
+        }
     }
 }

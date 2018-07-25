@@ -17,6 +17,7 @@ class Match extends JsonResource
         //return parent::toArray($request);
         return [
           'id' => $this->id,
+          'status' => $this->status,
           'matchday' => $this->matchday,
           'homeTeamName' => $this->homeTeamName,
           'awayTeamName' => $this->awayTeamName,
@@ -36,6 +37,14 @@ class Match extends JsonResource
                   'penaltyShootout_result_GoalsAwayTeam' => $this->penaltyShootout_result_GoalsAwayTeam,
               ]
           ]
+        ];
+    }
+
+    public function with($request)
+    {
+        return [
+            'version' => '0.0.1',
+            'author_url' => url('https://laravel.com/')
         ];
     }
 }

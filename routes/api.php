@@ -31,4 +31,4 @@ Route::post('matchs', 'MatchController@store');
 Route::put('matchs', 'MatchController@store');
 
 //delete match
-Route::delete('matchs', 'MatchController@destroy');
+Route::delete('matchs/{id}', 'MatchController@destroy');
