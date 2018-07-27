@@ -17,7 +17,7 @@ class matchController extends Controller
     public function index()
     {
         // get matchs
-        $matchs = Matchs::paginate(15);
+        $matchs = Matchs::orderBy('created_at','desc')->paginate(5);
         //return collection of matchs as a resource
         return MatchResource::collection($matchs);
     }
